@@ -17,7 +17,7 @@
   import Vue from 'vue';
   @Component
   export default class Tags extends Vue{
-    @Prop(Array) dataSource:string[] | undefined;
+    @Prop() readonly dataSource:string[] | undefined;
     selectedTags: string[]=[];
 
     toggle(tag:string){
@@ -43,6 +43,7 @@
 
 <style lang="scss" scoped>
   .tags {
+    background: white;
     font-size: 14px;
     padding: 16px;
     flex-grow: 1;
