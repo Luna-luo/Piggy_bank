@@ -31,7 +31,7 @@
   })
   export default class Money extends Vue {
     tags = window.tagList;
-    recordList: RecordItem[]= recordList;
+    recordList=window.recordList;
     record: RecordItem={
       tags:[],notes:'',type:'-',amount:0
     };
@@ -45,12 +45,7 @@
     }
 
     saveRecord(){
-     recordListModel.create(this.record);
-    }
-
-    @Watch('recordList')
-    onRecordListChange(){
-      recordListModel.save()
+      window.createRecord(this.record);
     }
   }
 </script>
