@@ -18,12 +18,9 @@
   import NumberPad from '@/components/Money/NumberPad.vue';
   import Types from '@/components/Money/Types.vue';
   import Tags from '@/components/Money/Tags.vue';
-  import {Component,Watch} from 'vue-property-decorator';
-  import recordListModel from '@/models/recordListModel';
+  import {Component} from 'vue-property-decorator';
   import FormItem from '@/components/Money/FormItem.vue';
   import store from '@/store/index2';
-
-  const recordList = recordListModel.fetch();
 
 
 
