@@ -1,6 +1,8 @@
 
 type RootState = {
   recordList:RecordItem[],
+  createRecordError:Error|null,
+  createTagError:Error|null,
   tagList:Tag[],
   currentTag?:Tag
 }
@@ -23,7 +25,4 @@ type TagListModel = {
   update:(id:string,name:string)=>'success'|'not found'|'duplicated'
   remove:(id:string)=>boolean
   save:()=>void
-}
-
-interface Window{
 }
