@@ -1,6 +1,5 @@
 <template>
   <div class="numberPad">
-    <div class="output">{{output}}</div>
     <div class="buttons">
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
@@ -62,19 +61,13 @@
       this.output = '0';
     }
   }
+
 </script>
 
 <style lang="scss" scoped>
   @import "~@/assets/style/helper.scss";
   .numberPad {
-    .output {
-      @extend %clearFix;
-      @extend %innerShadow;
-      font-size: 36px;
-      font-family: Consolas, monospace;
-      padding: 9px 16px;
-      text-align: right;
-    }
+
     .buttons {
       @extend %clearFix;
       > button {

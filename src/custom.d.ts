@@ -14,14 +14,20 @@ type RecordItem = {
   createAt?:string
 }
 
+type NewTag ={
+  name:string;
+  icon:string;
+}
+
 type Tag = {
   id:string;
   name:string;
+  icon:string;
 }
 type TagListModel = {
   data:Tag[]
   fetch:()=>Tag[]
-  create:(name:string)=>'success'|'duplicated'
+  create:(name:string,iconNumber:string)=>'success'|'duplicated'
   update:(id:string,name:string)=>'success'|'not found'|'duplicated'
   remove:(id:string)=>boolean
   save:()=>void

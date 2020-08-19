@@ -1,15 +1,21 @@
 <template>
   <div class="tags">
-    <div class="new">
-      <button @click="createTag">新增标签</button>
-    </div>
+
     <ul class="current">
       <li v-for="tag in tagList" :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
-          @click="toggle(tag)">{{tag.name}}</li>
+          @click="toggle(tag)">
+        <Icon :name="tag.icon"/>
+        {{tag.name}}
+      </li>
+      <li>
+        <router-link to="/labels" class="item" active-class="selected">
+          <Icon name="plus"/>
+          <div class="center">编辑</div>
+        </router-link>
+      </li>
     </ul>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -48,36 +54,32 @@
     padding: 16px;
     flex-grow: 1;
     display: flex;
-    flex-direction: column-reverse;
     > .current {
       display: flex;
+      flex-direction: row;
       flex-wrap: wrap;
+      align-content: flex-start;
       > li {
-        $bg:#d9d9d9;
-        background:$bg;
-        $h: 24px;
-        height: $h;
-        line-height: $h;
-        border-radius: $h/2;
-        padding: 0 16px;
-        margin-right: 12px;
-        margin-top: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        .icon {
+          width:36px;
+          height:36px;
+        }
         &.selected {
-          background:darken($bg, 50%);
+          background:#c4c4c4;
           color:white;
         }
       }
     }
-    > .new {
-      padding-top: 16px;
-      button {
-        background: transparent;
-        border: none;
-        color: #999;
-        border-bottom: 1px solid;
-        padding: 0 4px;
-      }
+    .center {
+        text-align: center;
     }
+
   }
 
 </style>

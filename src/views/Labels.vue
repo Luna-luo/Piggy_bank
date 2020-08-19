@@ -10,7 +10,9 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <Button class="createTag" @click="createTag">新建标签</Button>
+      <router-link class="createTag" :to="'/labels/create'">
+        新建标签
+      </router-link>
     </div>
   </Layout>
 </template>
@@ -58,12 +60,12 @@
     }
   }
   .createTag{
-    background:#767676;
+    background:#e98f36;
     color:white;
     border-radius:4px;
     border:none;
-    height:40px;
-    padding:0 16px;
+    height:60px;
+    padding:8px 16px;
     &-wrapper {
       text-align: center;
       padding:16px;

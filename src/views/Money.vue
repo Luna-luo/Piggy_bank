@@ -1,7 +1,6 @@
 <template>
   <Layout class-prefix="layout">
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
-    <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
     <div class="notes">
       <FormItem field-name="备注"
                 placeholder="在这里输入备注"
@@ -10,6 +9,8 @@
       />
     </div>
     <Tags @update:value="record.tags=$event" />
+    <Output :value="record.amount"/>
+    <Tabs class-prefix="navbar" :data-source="recordTypeList" :value.sync="record.type"/>
 
   </Layout>
 </template>
@@ -22,10 +23,11 @@
   import FormItem from '@/components/Money/FormItem.vue';
   import Tabs from '@/components/Tabs.vue';
   import recordTypeList from '@/constants/recordTypeList';
+  import Output from '@/components/Money/Output.vue';
 
 
   @Component({
-    components:{Tabs, FormItem, Tags, NumberPad},
+    components:{Output, Tabs, FormItem, Tags, NumberPad},
   })
   export default class Money extends Vue {
     get recordList(){
@@ -66,5 +68,10 @@
   .notes {
     padding:12px 0;
   }
+  ::v-deep .navbar-tabs-item {
+    border:1px solid red;
+    height: 48px;
+  }
+
 </style>
 

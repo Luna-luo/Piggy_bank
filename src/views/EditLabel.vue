@@ -9,10 +9,20 @@
             <FormItem :value="currentTag.name"
                       @update:value="update"
                       field-name="标签名"
-                      placeholder="请输入签名"/>
+                      placeholder="请输入标签名"/>
+        </div>
+        <div class="tag-pics">
+            <span class="text">请选择图标:</span>
+            <ul class="pictures">
+                <li v-for="number in pictures" :key="number"
+                    :class="{selected:selectedTags.indexOf(number)>=0}"
+                    @click="changeIcon(number)">
+                    <Icon :name="number" />
+                </li>
+            </ul>
         </div>
         <div class="button-wrapper">
-            <Button @click="remove">删除标签</Button>
+            <Button class="delete" @click="remove">删除标签</Button>
         </div>
     </Layout>
 </template>
@@ -27,8 +37,28 @@
       components:{Button, FormItem},
     })
     export default class EditLabel extends Vue{
+
+
+      get pictures(){
+        return ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
+      }
+
       get currentTag(){
         return this.$store.state.currentTag;
+      }
+      selectedTags: string[]=[this.currentTag.icon];
+      changeIcon(number:string){
+        const index = this.selectedTags.indexOf(number);
+        if(this.selectedTags.length===0){
+          this.selectedTags.push(number)
+        } else if(index===0){
+          this.selectedTags.splice(0,1)
+        } else {
+          this.selectedTags.splice(0,1)
+          this.selectedTags.push(number)
+        }
+        if (this.currentTag.name === '') { return window.alert("标签名不能为空");}
+        this.$store.commit('updateTagIcon', {id:this.currentTag.id,icon:this.selectedTags[0]});
       }
 
         created(){
@@ -43,7 +73,7 @@
         update(name:string){
           if (this.currentTag){
              this.$store.commit('updateTag',
-               {id:this.currentTag.id,name});
+               {id:this.currentTag.id,name,icon:this.currentTag.icon});
           }
         }
         remove(){
@@ -89,5 +119,37 @@
         padding:16px;
         margin-top:44-16px;
     }
+    .delete{
+        background: #e98f36;
+    }
+    .tag-pics {
+        padding-left: 14px;
+        margin-top:16px;
+        background:white;
+        > .pictures {
+            padding-top: 16px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            > li {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 60px;
+                height: 60px;
 
+                .icon {
+                    width: 36px;
+                    height: 36px;
+                }
+
+                &.selected {
+                    background: #c4c4c4;
+                    color: white;
+                }
+            }
+
+        }
+    }
 </style>

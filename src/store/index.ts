@@ -20,8 +20,8 @@ const store = new Vuex.Store({
       state.currentTag = state.tagList.filter(t=>t.id ===id)[0];
     },
 
-    updateTag(state,payload:{id:string,name:string}){
-      const {id,name}=payload;
+    updateTag(state,payload:{id:string,name:string,icon:string}){
+      const {id,name,icon}=payload;
       const idList = state.tagList.map(item=>item.id);
       if(idList.indexOf(id)>=0) {
         const names = state.tagList.map(item => item.name);
@@ -30,9 +30,17 @@ const store = new Vuex.Store({
         } else {
           const tag = state.tagList.filter(item => item.id === id)[0];
           tag.name = name;
+          tag.icon = icon;
           store.commit('saveTags');
         }
       }
+    },
+    updateTagIcon(state,payload:{id:string,icon:string}){
+      const {id,icon}=payload;
+      const tag = state.tagList.filter(item => item.id ===id)[0];
+      tag.icon = icon;
+      store.commit('saveTags');
+
     },
 
     removeTag(state,id:string){
@@ -68,13 +76,14 @@ const store = new Vuex.Store({
     fetchTags(state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
       if(!state.tagList || state.tagList.length === 0){
-        store.commit('createTag','衣');
-        store.commit('createTag','食');
-        store.commit('createTag','住');
-        store.commit('createTag','行');
+        store.commit('createTag',{name:'服饰',icon:'1'});
+        store.commit('createTag',{name:'用餐',icon:'2'});
+        store.commit('createTag',{name:'住房',icon:'3'});
+        store.commit('createTag',{name:'交通',icon:'4'});
       }
     },
-    createTag(state, name: string) {
+    createTag(state, payload:{name:string,icon:string}) {
+      const {name,icon}=payload;
       state.createTagError = null;
       const names = state.tagList.map(item => item.name);
       if (names.indexOf(name) >= 0) {
@@ -82,7 +91,8 @@ const store = new Vuex.Store({
         return;
       }
       const id = createId().toString();
-      state.tagList.push({id, name: name});
+      console.log(icon)
+      state.tagList.push({id, name: name,icon:icon});
       store.commit('saveTags');
     },
     saveTags(state) {
