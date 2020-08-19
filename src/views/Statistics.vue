@@ -14,7 +14,9 @@
             </li>
         </ol>
         <div v-else class="noResult">
-            目前没有相关记录
+        <Icon name="none" />
+
+           <div> 目前没有相关记录,快去添加吧</div>
 
         </div>
     </Layout>
@@ -133,6 +135,12 @@
         margin-right: auto;
         margin-left: 16px;
         color: #999999;
+    }
+    svg{
+        .icon{
+            height:80px;
+            width:80px;
+        }
     }
 </style>
 
