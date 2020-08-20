@@ -6,10 +6,12 @@
     import{Component,Prop,Vue} from 'vue-property-decorator';
     import echarts, {EChartOption} from 'echarts';
 
+    @Component
     export default class Chart extends Vue {
-      @Prop() options?:EChartOption;
+      @Prop() options?: EChartOption;
 
       mounted(){
+        console.log('运行了');
         if(this.options === undefined){
           return console.error('options 为空')
         }
