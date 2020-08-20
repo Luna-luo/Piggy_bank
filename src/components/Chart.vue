@@ -11,7 +11,6 @@
       @Prop() options?: EChartOption;
 
       mounted(){
-        console.log('运行了');
         if(this.options === undefined){
           return console.error('options 为空')
         }
