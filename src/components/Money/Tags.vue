@@ -53,6 +53,7 @@
     font-size: 14px;
     padding: 16px;
     flex-grow: 1;
+    flex-shrink: 1;
     display: flex;
     > .current {
       display: flex;

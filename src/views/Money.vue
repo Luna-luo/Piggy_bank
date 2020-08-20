@@ -5,11 +5,11 @@
         <button @click="inputContent">1</button>
         <button @click="inputContent">2</button>
         <button @click="inputContent">3</button>
-        <button @click="remove">删除</button>
+        <button @click="remove">清空</button>
         <button @click="inputContent">4</button>
         <button @click="inputContent">5</button>
         <button @click="inputContent">6</button>
-        <button @click="clear">清空</button>
+        <button @click="remove">删除</button>
         <button @click="inputContent">7</button>
         <button @click="inputContent">8</button>
         <button @click="inputContent">9</button>
@@ -17,6 +17,12 @@
         <button @click="inputContent" class="zero">0</button>
         <button @click="inputContent">.</button>
       </div>
+    </div>
+    <div class="createAt">
+      <FormItem field-name="日期"
+                type="date"
+                placeholder="在这里输入日期"
+                :value.sync="record.createAt"/>
     </div>
     <div class="notes">
       <FormItem field-name="备注"
@@ -52,7 +58,7 @@
     recordTypeList = recordTypeList;
 
     record: RecordItem={
-      tags:[],notes:'',type:'-',amount:0
+      tags:[],notes:'',type:'-',amount:0,createAt:new Date().toISOString()
     };
     created(){
       this.$store.commit('fetchRecords');
@@ -115,10 +121,6 @@
   ::v-deep .layout-content {
     display: flex;
     flex-direction: column-reverse;
-  }
-  ::v-deep .tags{
-    flex-grow: 1;
-    flex-shrink: 1;
   }
   .notes {
     padding:6px 0;
