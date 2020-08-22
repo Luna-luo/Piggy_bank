@@ -27,13 +27,14 @@ const routes = [
     component: Statistics
   },
   {
-    path: '/labels/edit/:id',
-    component:EditLabel
-  },
-  {
     path: '/labels/create',
     component:CreateTag
   },
+  {
+    path: '/labels/edit/:id',
+    component:EditLabel
+  },
+
   {
     path: '*',
     component: NotFound

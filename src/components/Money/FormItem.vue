@@ -1,21 +1,24 @@
 <template>
   <div>
-    <label class="formItem">
       <template v-if="type ==='date'">
-        <input :type="type ||'text'"
-               :value="x(value)"
-               @input="onValueChanged($event.target.value)"
-               :placeholder="this.placeholder">
+          <label class="dateFormItem">
+
+          <input :type="type ||'text'"
+                 :value="x(value)"
+                 @input="onValueChanged($event.target.value)"
+                 :placeholder="this.placeholder"
+                 id="dateBlank">
+          </label>
       </template>
       <template v-else>
+          <label class="formItem">
         <span class="name">{{this.fieldName}}</span>
         <input :type="type || 'text'"
                :value="value"
                @input="onValueChanged($event.target.value)"
                :placeholder="this.placeholder">
+          </label>
       </template>
-
-    </label>
   </div>
 </template>
 
@@ -23,8 +26,10 @@
   import Vue from 'vue';
   import {Component,Prop} from 'vue-property-decorator';
   import dayjs from 'dayjs';
-
-  @Component
+  import Labels from '@/views/Labels.vue';
+  @Component({
+    components: {Labels}
+  })
   export default class FormItem extends Vue {
     @Prop({default:''}) readonly value!:string;
 
@@ -54,8 +59,32 @@
       height: 40px;
       flex-grow: 1;
       background: transparent;
-      border: none;
+        border:none;
       padding-right: 16px;
     }
   }
+  .dateFormItem {
+      font-size: 14px;
+      /*display: flex;*/
+      align-items: center;
+
+      input {
+          border:none;
+          display: flex;
+          flex-wrap: wrap;
+          height: 40px;
+          background: transparent;
+          padding-right: 16px;
+
+      }
+  }
+  #dateBlank{
+    padding-right: 2px;
+    padding-top: 18px;
+  }
+  input::-webkit-calendar-picker-indicator { margin-left:0px;}
+  input::-webkit-datetime-edit {  font-size: 11px;
+      margin-left: 4px;}
+  /*::-webkit-datetime-edit-fields-wrapper { border:1px solid blue;font-size: 10px; }*/
+
 </style>

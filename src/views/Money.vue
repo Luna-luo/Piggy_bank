@@ -5,11 +5,11 @@
         <button @click="inputContent">1</button>
         <button @click="inputContent">2</button>
         <button @click="inputContent">3</button>
-        <button ><div class="createAt">
+        <div class="createAt">
           <FormItem
                   type="date"
                   :value.sync="record.createAt"/>
-        </div></button>
+        </div>
         <button @click="inputContent">4</button>
         <button @click="inputContent">5</button>
         <button @click="inputContent">6</button>
@@ -127,6 +127,19 @@
   }
   ::v-deep .navbar-tabs-item {
     height: 58px;
+  }
+  .createAt{
+    width:25%;
+    height:60px;
+    float: left;
+    background: transparent;
+    border: none;
+    background: darken(#f2f2f2, 4*3%);
+    > div {
+      height:60px;
+      > template .dateFormItem {
+      }
+    }
   }
   @import "~@/assets/style/helper.scss";
   .numberPad {
