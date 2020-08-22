@@ -1,5 +1,5 @@
 <template>
-  <div class="tags" :class="classPrefix && `${classPrefix}-wrapper`">
+  <div class="tags" >
 
     <ul class="current">
       <li v-for="tag in tagList" :key="tag.id"

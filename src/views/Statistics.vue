@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-        <div class="chart-wrapper" ref="chartWrapper">
+        <div v-if="groupedList.length>0" class="chart-wrapper" ref="chartWrapper">
             <Chart class="chart" :options="chartOptions"/>
         </div>
         <ol v-if="groupedList.length>0">
@@ -17,7 +17,7 @@
             </li>
         </ol>
         <div v-else class="noResult">
-        <Icon name="none" />
+        <Icon name="none" id="no"/>
            <div> 目前没有相关记录,快去添加吧</div>
         </div>
     </Layout>
@@ -65,15 +65,15 @@
 
     get keyValueList(){
       const today = new Date();
-      console.log(day(today));
       const array = [];
+      console.log(this.groupedList)
       for(let i = 0;i<=29;i++){
         const dateString = day(today).subtract(i,'day').format('YYYY-MM-DD');
-        const found = _.find(this.recordList,{
-          createAt: dateString
+        const found = _.find(this.groupedList,{
+          title: dateString
         });
         array.push({
-          date: dateString, value: found ? found.amount:0
+          date: dateString, value: found ? found.total:0
         });
       }
       array.sort((a,b)=>{
@@ -91,8 +91,6 @@
     get chartOptions() {
       const keys=this.keyValueList.map(item=>item.date);
       const values = this.keyValueList.map(item=>item.value);
-      console.log(keys)
-      console.log(values)
       return {
         grid:{
           left:0,
@@ -100,24 +98,25 @@
         },
         xAxis: {
           type: 'category',
-          date:keys,
-          axisTick:{alignWithLabel:true},
-          axisLine:{lineStyle:{color:'#666'}},
-          axisLabel:{
-            formatter:function(value:string, index: number){
-              return value.substr(5)
+          data: keys,
+          axisTick: {alignWithLabel: true},
+          axisLine: {lineStyle: {color: '#666'}},
+          axisLabel: {
+            formatter: function (value: string) {
+              return value.substr(5);
             }
           }
         },
         yAxis: {
           type: 'value',
-          show:false
+          show:false,
         },
         series: [{
-          symbol:'circle',
-          symbolSize:12,
-          itemStyle:{borderWidth:1,color:'#666',borderColor:'#666'},
-          date:values,
+          symbol: 'circle',
+          symbolSize: 12,
+          itemStyle: {borderWidth: 1, color: '#666', borderColor: '#666'},
+          // lineStyle: {width: 10},
+          data: values,
           type: 'line'
         }],
         tooltip: {
@@ -168,7 +167,7 @@
 
 <style scoped lang="scss">
     .echarts{
-        max-width: 100%;
+        max-width:100%;
         height:400px;
     }
     .noResult {
@@ -220,12 +219,10 @@
             }
         }
     }
-    svg{
-        .icon{
-            height:80px;
-            width:80px;
+         #no {
+            height:100px;
+            width:100px;
         }
-    }
 </style>
 
 
