@@ -33,7 +33,7 @@
   export default class FormItem extends Vue {
     @Prop({default:''}) readonly value!:string;
 
-    @Prop({required:true}) fieldName!:string;
+    @Prop() fieldName!:string;
     @Prop() placeholder?:string;
     @Prop() type?:string;
 
@@ -82,7 +82,7 @@
     padding-right: 2px;
     padding-top: 18px;
   }
-  input::-webkit-calendar-picker-indicator { margin-left:0px;}
+  input::-webkit-calendar-picker-indicator { margin-left:0;}
   input::-webkit-datetime-edit {  font-size: 11px;
       margin-left: 4px;}
   /*::-webkit-datetime-edit-fields-wrapper { border:1px solid blue;font-size: 10px; }*/

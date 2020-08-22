@@ -37,16 +37,13 @@
       components:{Button, FormItem},
     })
     export default class EditLabel extends Vue{
-
-
-      get pictures(){
-        return ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
-      }
-
       get currentTag(){
         return this.$store.state.currentTag;
       }
-      selectedTags: string[]=[this.currentTag.icon];
+      get pictures(){
+        return ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
+      }
+      selectedTags: string[]=[];
       changeIcon(number:string){
         const index = this.selectedTags.indexOf(number);
         if(this.selectedTags.length===0){
@@ -68,6 +65,8 @@
           if(!this.currentTag){
             this.$router.replace('/404');
           }
+          this.selectedTags.push(this.currentTag.icon)
+
         }
 
         update(name:string){
@@ -138,7 +137,6 @@
                 align-items: center;
                 width: 60px;
                 height: 60px;
-
                 .icon {
                     width: 36px;
                     height: 36px;

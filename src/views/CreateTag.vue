@@ -32,12 +32,11 @@
   import {Component} from 'vue-property-decorator';
   import FormItem from '@/components/Money/FormItem.vue';
   import Button from '@/components/Button.vue';
-  import createId from '@/lib/createId';
 
   @Component({
     components:{Button, FormItem},
   })
-  export default class EditLabel extends Vue {
+  export default class CreateTag extends Vue {
     selectedTags: string[]=[];
     tag: NewTag={name:'',icon:''}
 
